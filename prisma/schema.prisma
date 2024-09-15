@@ -9,3 +9,80 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Role {
+  id          Int    @id @default(autoincrement()) @map("tipo_usuario_id")
+  description String @map("descricao")
+  users       User[]
+
+  @@map("Tipo_Usuario")
+}
+
+model Shift {
+  id          Int      @id @default(autoincrement()) @map("turno_id")
+  description String   @map("descricao")
+  start       DateTime @map("inicio")
+  end         DateTime @map("fim")
+  users       User[]
+
+  @@map("Turno")
+}
+
+model UserInfo {
+  id         Int     @id @default(autoincrement()) @map("contato_id")
+  phone      String  @map("telefone")
+  email      String  @unique
+  zipcode    String  @map("cep")
+  street     String  @map("rua")
+  number     Int?    @map("numero")
+  complement String? @map("complemento")
+  city       String  @map("cidade")
+  state      String  @map("estado")
+  userId     Int     @unique @map("usuario_id")
+  user       User?   @relation(fields: [userId], references: [id])
+
+  @@map("Contato")
+}
+
+model User {
+  id       Int       @id @default(autoincrement()) @map("usuario_id")
+  name     String    @map("nome")
+  document String    @unique @map("cpf")
+  password String    @map("senha")
+  birth    DateTime? @map("data_nascimento")
+  roleId   Int       @unique @map("tipo_usuario_id")
+  role     Role      @relation(fields: [roleId], references: [id])
+  shiftId  Int       @unique @map("turno_id")
+  shift    Shift?    @relation(fields: [shiftId], references: [id])
+  userInfo UserInfo?
+
+  @@map("Usuario")
+}
+
+model Machine {
+  id           Int      @id @default(autoincrement()) @map("maquina_id")
+  description  String   @map("descricao")
+  localization String   @map("localizacao")
+  metrics      Metrics?
+
+  @@map("Maquina")
+}
+
+model Metrics {
+  id                    Int      @id @default(autoincrement()) @map("indicadores_id")
+  oee                   Float    @map("ind_oee")
+  quality               Float    @map("ind_qualidade")
+  performance           Float    @map("ind_performance")
+  availability          Float    @map("ind_disponibilidade")
+  scheduledTime         Int      @map("tempo_programado")
+  productionTime        Int      @map("tempo_em_producao")
+  productionTheoricTIme Int      @map("tempo_teorico_producao")
+  downtime              Int      @map("tempo_paradas")
+  partsProduced         Int      @map("pecas_produzidas")
+  partsDiscarded        Int      @map("pecas_defeito")
+  date                  DateTime @map("data")
+  machineId             Int      @unique @map("maquina_id")
+  machine               Machine  @relation(fields: [machineId], references: [id])
+
+  @@map("Indicadores")
+}
