@@ -19,7 +19,7 @@ export class AuthService {
     return null;
   }
 
-  async authenticate(input: AuthInput): Promise<AuthResult> {
+  async signIn(input: AuthInput): Promise<AuthResult> {
     const user = await this.validateUser(input);
 
     if (!user) {
