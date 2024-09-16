@@ -17,6 +17,13 @@ export class UsersService {
     });
   }
 
+  async getUserById(id: string): Promise<User | null> {
+    return this.dbService.user.findUnique({
+      where: { id: parseInt(id) },
+      include: { role: true, shift: true, userInfo: true },
+    });
+  }
+
   async createUser(user: CreateUserDTO): Promise<{ username: string }> {
     const newUser = await this.dbService.user.create({
       data: {
