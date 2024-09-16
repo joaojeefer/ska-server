@@ -1,27 +1,44 @@
 import { Injectable } from '@nestjs/common';
-
-export type User = {
-  id: number;
-  username: string;
-  password: string;
-};
-
-const users: User[] = [
-  {
-    id: 1,
-    username: '12345678900',
-    password: 'changeme', // use a hash instead of a plain text password
-  },
-  {
-    id: 2,
-    username: '12345678901',
-    password: 'secret',
-  },
-];
+import { PrismaService } from 'src/db/prisma.service';
+import User from './user.entity';
+import CreateUserDTO from './dto/user';
 
 @Injectable()
 export class UsersService {
-  async findUserByName(username: string): Promise<User | undefined> {
-    return users.find((user) => user.username === username);
+  constructor(private dbService: PrismaService) {}
+
+  async findUserByUsername(username: string): Promise<User | undefined> {
+    return this.dbService.user.findUnique({ where: { username } });
+  }
+
+  async createUser(user: CreateUserDTO): Promise<{ username: string }> {
+    const newUser = await this.dbService.user.create({
+      data: {
+        name: user.name,
+        username: user.username,
+        password: user.password,
+        birth: user.birth,
+        role: {
+          connect: { id: user.roleId },
+        },
+        shift: {
+          connect: { id: user.shiftId },
+        },
+        userInfo: {
+          create: {
+            phone: user.phone,
+            email: user.email,
+            street: user.street,
+            number: user.number,
+            complement: user.complement,
+            zipCode: user.zipCode,
+            city: user.city,
+            state: user.state,
+          },
+        },
+      },
+    });
+
+    return { username: newUser.username };
   }
 }

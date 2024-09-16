@@ -14,7 +14,7 @@ export class AuthService {
   ) {}
 
   async validateUser(input: AuthInput): Promise<SignInData | null> {
-    const user = await this.usersService.findUserByName(input.username);
+    const user = await this.usersService.findUserByUsername(input.username);
 
     if (user && user.password === input.password) {
       return { userId: user.id, username: user.username };
