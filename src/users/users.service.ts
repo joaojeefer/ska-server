@@ -11,6 +11,12 @@ export class UsersService {
     return this.dbService.user.findUnique({ where: { username } });
   }
 
+  async getUsers(): Promise<User[]> {
+    return this.dbService.user.findMany({
+      include: { role: true, shift: true, userInfo: true },
+    });
+  }
+
   async createUser(user: CreateUserDTO): Promise<{ username: string }> {
     const newUser = await this.dbService.user.create({
       data: {
