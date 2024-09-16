@@ -32,7 +32,7 @@ model UserInfo {
   id         Int     @id @default(autoincrement()) @map("contato_id")
   phone      String  @map("telefone")
   email      String  @unique
-  zipcode    String  @map("cep")
+  zipCode    String  @map("cep")
   street     String  @map("rua")
   number     Int?    @map("numero")
   complement String? @map("complemento")
@@ -47,7 +47,7 @@ model UserInfo {
 model User {
   id       Int       @id @default(autoincrement()) @map("usuario_id")
   name     String    @map("nome")
-  document String    @unique @map("cpf")
+  username String    @unique @map("cpf")
   password String    @map("senha")
   birth    DateTime? @map("data_nascimento")
   roleId   Int       @unique @map("tipo_usuario_id")
