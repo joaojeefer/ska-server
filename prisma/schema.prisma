@@ -50,9 +50,9 @@ model User {
   username String    @unique @map("cpf")
   password String    @map("senha")
   birth    DateTime? @map("data_nascimento")
-  roleId   Int       @unique @map("tipo_usuario_id")
+  roleId   Int       @map("tipo_usuario_id")
   role     Role      @relation(fields: [roleId], references: [id])
-  shiftId  Int       @unique @map("turno_id")
+  shiftId  Int       @map("turno_id")
   shift    Shift?    @relation(fields: [shiftId], references: [id])
   userInfo UserInfo?
 
