@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
-import CreateShiftDTO from './dto/shift';
+import CreateShiftDTO from './dto/create-shift.dto';
 
 @Injectable()
 export class ShiftService {
