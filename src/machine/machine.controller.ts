@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MachineService } from './machine.service';
-import CreateMachineDTO from './dto/machine';
+import CreateMachineDTO from './dto/create-machine.dto';
 
 @Controller('machine')
 export class MachineController {
