@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './db/db.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { MachineModule } from './machine/machine.module';
+import { ShiftModule } from './shift/shift.module';
 import { RoleModule } from './role/role.module';
 
 @Module({
@@ -16,6 +17,7 @@ import { RoleModule } from './role/role.module';
     MetricsModule,
     MachineModule,
     RoleModule,
+    ShiftModule,
   ],
   controllers: [],
   providers: [],
