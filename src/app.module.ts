@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './db/db.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { MachineModule } from './machine/machine.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MachineModule } from './machine/machine.module';
     UsersModule,
     MetricsModule,
     MachineModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [],
