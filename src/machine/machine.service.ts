@@ -16,7 +16,9 @@ export class MachineService {
     });
   }
 
-  async createMachine(machine: CreateMachineDTO): Promise<{ id: number }> {
+  async createMachine(
+    machine: CreateMachineDTO,
+  ): Promise<{ machineId: number }> {
     const newMachine = await this.dbService.machine.create({
       data: {
         description: machine.description,
@@ -24,6 +26,6 @@ export class MachineService {
       },
     });
 
-    return { id: newMachine.id };
+    return { machineId: newMachine.id };
   }
 }

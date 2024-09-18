@@ -10,13 +10,15 @@ export class ShiftService {
     return this.dbService.shift.findMany();
   }
 
-  async createShift(data: CreateShiftDTO) {
-    return this.dbService.shift.create({
+  async createShift(data: CreateShiftDTO): Promise<{ shiftId: number }> {
+    const newShift = await this.dbService.shift.create({
       data: {
         description: data.description,
         start: data.start,
         end: data.end,
       },
     });
+
+    return { shiftId: newShift.id };
   }
 }

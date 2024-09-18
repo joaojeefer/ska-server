@@ -10,11 +10,13 @@ export class RoleService {
     return this.dbService.role.findMany();
   }
 
-  async createRole(data: CreateRoleDTO) {
-    return this.dbService.role.create({
+  async createRole(data: CreateRoleDTO): Promise<{ roleId: number }> {
+    const newRole = await this.dbService.role.create({
       data: {
         description: data.description,
       },
     });
+
+    return { roleId: newRole.id };
   }
 }
