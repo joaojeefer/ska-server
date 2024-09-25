@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -19,10 +19,10 @@ model Role {
 }
 
 model Shift {
-  id          Int      @id @default(autoincrement()) @map("turno_id")
-  description String   @map("descricao")
-  start       DateTime @map("inicio")
-  end         DateTime @map("fim")
+  id          Int       @id @default(autoincrement()) @map("turno_id")
+  description String    @map("descricao")
+  start       DateTime? @map("inicio")
+  end         DateTime? @map("fim")
   users       User[]
 
   @@map("Turno")

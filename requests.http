@@ -1,0 +1,107 @@
+GET http://localhost:3000/roles
+
+###
+POST http://localhost:3000/roles
+content-type: application/json
+
+{
+    "description": "manutencao"
+}
+
+###
+GET http://localhost:3000/shifts
+
+###
+POST http://localhost:3000/shifts
+content-type: application/json
+
+{
+    "description": "noite",
+    "start": "2001-01-01T22:00:00.000Z",
+    "end": "2001-01-01T06:00:00.000Z"
+}
+
+###
+POST http://localhost:3000/auth/login
+content-type: application/json
+
+{
+    "username": "1234567890",
+    "password": "123123"
+}
+
+###
+GET http://localhost:3000/users
+# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
+
+###
+GET http://localhost:3000/users/1
+# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
+
+###
+POST http://localhost:3000/users
+content-type: application/json
+
+{
+    "name": "João Jeefer da Silva Félix",
+    "username": "1234567890",
+    "password": "123123",
+    "email": "joao.jeefer@gmail.com",
+    "phone": "1234567890",
+    "roleId": 1,
+    "shiftId": 2,
+    "street": "Rua dos ministérios",
+    "number": 10,
+    "zipCode": "95765000",
+    "city": "Porto Alegre",
+    "state": "RS"
+}
+
+###
+GET http://localhost:3000/machine
+
+###
+POST http://localhost:3000/machine
+content-type: application/json
+
+{
+    "description": "Máquina de teste",
+    "localization": "Setor A"
+}
+
+###
+GET http://localhost:3000/machines
+
+###
+GET http://localhost:3000/machines/1
+
+###
+POST http://localhost:3000/machines
+content-type: application/json
+
+{
+    "description": "Máquina de teste 1",
+    "localization": "Setor B"
+}
+
+###
+GET http://localhost:3000/metrics/machine/1
+
+###
+POST http://localhost:3000/metrics/machine
+content-type: application/json
+
+{
+    "machineId": 1,
+    "availability": 100,
+    "performance": 100,
+    "quality": 100,
+    "oee": 100,
+    "scheduledTime": 100,
+    "productionTime": 100,
+    "productionTheoricTIme": 100,
+    "downtime": 100,
+    "partsProduced": 100,
+    "partsDiscarded": 100,
+    "date": "2021-07-19T00:00:00.000Z"
+}
