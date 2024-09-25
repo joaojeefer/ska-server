@@ -11,7 +11,7 @@ export class MachineService {
   }
 
   async getMachineById(id: string) {
-    return this.dbService.machine.findUnique({
+    return this.dbService.machine.findUniqueOrThrow({
       where: { id: parseInt(id) },
     });
   }
