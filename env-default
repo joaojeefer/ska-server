@@ -1,0 +1,5 @@
+Rename this file to .env and change the key values if necessary
+
+JWT_SECRET=030af4f8df7138032bc6881c2515addf3202e9a4436f46f15f36778c190096e4
+
+DATABASE_URL=file:./dev.db
