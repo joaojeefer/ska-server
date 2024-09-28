@@ -1,7 +1,7 @@
-GET http://localhost:3000/roles
+GET http://localhost:3001/roles
 
 ###
-POST http://localhost:3000/roles
+POST http://localhost:3001/roles
 content-type: application/json
 
 {
@@ -9,10 +9,10 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/shifts
+GET http://localhost:3001/shifts
 
 ###
-POST http://localhost:3000/shifts
+POST http://localhost:3001/shifts
 content-type: application/json
 
 {
@@ -22,7 +22,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:3000/auth/login
+POST http://localhost:3001/auth/login
 content-type: application/json
 
 {
@@ -31,15 +31,15 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/users
+GET http://localhost:3001/users
 # authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
 
 ###
-GET http://localhost:3000/users/1
+GET http://localhost:3001/users/1
 # authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3001/users
 content-type: application/json
 
 {
@@ -58,10 +58,10 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/machine
+GET http://localhost:3001/machine
 
 ###
-POST http://localhost:3000/machine
+POST http://localhost:3001/machine
 content-type: application/json
 
 {
@@ -70,13 +70,13 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/machines
+GET http://localhost:3001/machines
 
 ###
-GET http://localhost:3000/machines/1
+GET http://localhost:3001/machines/1
 
 ###
-POST http://localhost:3000/machines
+POST http://localhost:3001/machines
 content-type: application/json
 
 {
@@ -85,10 +85,10 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/metrics/machine/1
+GET http://localhost:3001/metrics/machine/1
 
 ###
-POST http://localhost:3000/metrics/machine
+POST http://localhost:3001/metrics/machine
 content-type: application/json
 
 {
