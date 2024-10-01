@@ -1,27 +1,8 @@
-GET http://localhost:3001/roles
+# Antes de fazer a requisição, certifique-se de ter instalado o plugin REST Client no Visual Studio Code.
+# Para realizar uma requesição, é necessário passar um token de autenticação no header da mesma. Para obter o token, faça o login com um usuário já cadastrado no sistema.
+# Como exemplo, faça a requisição de login (auth/login) com o usuário 1234567890 e senha 123123. O token retornado deve ser passado no header de todas as requisições.
 
-###
-POST http://localhost:3001/roles
-content-type: application/json
-
-{
-    "description": "manutencao"
-}
-
-###
-GET http://localhost:3001/shifts
-
-###
-POST http://localhost:3001/shifts
-content-type: application/json
-
-{
-    "description": "noite",
-    "start": "2001-01-01T22:00:00.000Z",
-    "end": "2001-01-01T06:00:00.000Z"
-}
-
-###
+### login
 POST http://localhost:3001/auth/login
 content-type: application/json
 
@@ -30,17 +11,18 @@ content-type: application/json
     "password": "123123"
 }
 
-###
+### lista de usuários
 GET http://localhost:3001/users
-# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
+### usuário específico
 GET http://localhost:3001/users/1
-# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MDAiLCJpYXQiOjE3MjY2MTA0MDQsImV4cCI6MTcyNjY5NjgwNH0.7cy2KQXs7QRhBI9KZKPN2hfIwGCOCI2C-ZFvo0QhHHk
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
+### cadastro de usuário
 POST http://localhost:3001/users
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
 {
     "name": "João Jeefer da Silva Félix",
@@ -57,39 +39,60 @@ content-type: application/json
     "state": "RS"
 }
 
-###
-GET http://localhost:3001/machine
+### lista de papéis / tipo de usuário
+GET http://localhost:3001/roles
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
-POST http://localhost:3001/machine
+### cadastro de papel / tipo de usuário
+POST http://localhost:3001/roles
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
 {
-    "description": "Máquina de teste",
-    "localization": "Setor A"
+    "description": "manutencao"
 }
 
-###
+### lista de turnos
+GET http://localhost:3001/shifts
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
+
+### cadastro de turno
+POST http://localhost:3001/shifts
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
+
+{
+    "description": "noite",
+    "start": "2001-01-01T22:00:00.000Z",
+    "end": "2001-01-01T06:00:00.000Z"
+}
+
+### lista de máquinas
 GET http://localhost:3001/machines
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
+### máquina específica
 GET http://localhost:3001/machines/1
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
+### cadastro de máquina
 POST http://localhost:3001/machines
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
 {
     "description": "Máquina de teste 1",
     "localization": "Setor B"
 }
 
-###
+### lista de métricas de máquina
 GET http://localhost:3001/metrics/machine/1
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
-###
+### cadastro de métrica de máquina
 POST http://localhost:3001/metrics/machine
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
 {
     "machineId": 1,
