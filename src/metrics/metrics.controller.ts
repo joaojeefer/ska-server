@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { MetricsService } from './metrics.service';
 import CreateMetricsDTO from './dto/create-metrics.dto';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
 
 @Controller('metrics')
+@UseGuards(AuthGuard)
 export class MetricsController {
   constructor(private metricsService: MetricsService) {}
 
