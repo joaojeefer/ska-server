@@ -2,14 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
 import CreateUserDTO from './dto/create-user.dto';
 import { GetUserDTO } from './dto/get-user.dto';
+import User from './user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(private dbService: PrismaService) {}
 
-  async findUserByUsername(username: string): Promise<GetUserDTO | undefined> {
+  async findUserByUsername(username: string): Promise<User | undefined> {
     return this.dbService.user.findUnique({
-      select: { id: true, name: true, username: true },
+      include: { role: true, shift: true, userInfo: true },
       where: { username },
     });
   }
@@ -22,8 +23,8 @@ export class UsersService {
 
   async getUserById(id: string): Promise<GetUserDTO | undefined> {
     return this.dbService.user.findUnique({
-      where: { id: parseInt(id) },
       select: { id: true, name: true, username: true },
+      where: { id: parseInt(id) },
     });
   }
 
