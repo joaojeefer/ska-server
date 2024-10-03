@@ -45,16 +45,17 @@ model UserInfo {
 }
 
 model User {
-  id       Int       @id @default(autoincrement()) @map("usuario_id")
-  name     String    @map("nome")
-  username String    @unique @map("cpf")
-  password String    @map("senha")
-  birth    DateTime? @map("data_nascimento")
-  roleId   Int       @map("tipo_usuario_id")
-  role     Role      @relation(fields: [roleId], references: [id])
-  shiftId  Int       @map("turno_id")
-  shift    Shift?    @relation(fields: [shiftId], references: [id])
-  userInfo UserInfo?
+  id              Int               @id @default(autoincrement()) @map("usuario_id")
+  name            String            @map("nome")
+  username        String            @unique @map("cpf")
+  password        String            @map("senha")
+  birth           DateTime?         @map("data_nascimento")
+  roleId          Int               @map("tipo_usuario_id")
+  role            Role              @relation(fields: [roleId], references: [id])
+  shiftId         Int               @map("turno_id")
+  shift           Shift?            @relation(fields: [shiftId], references: [id])
+  userInfo        UserInfo?
+  ProductionOrder ProductionOrder[]
 
   @@map("Usuario")
 }
@@ -63,7 +64,8 @@ model Machine {
   id           Int      @id @default(autoincrement()) @map("maquina_id")
   description  String   @map("descricao")
   localization String   @map("localizacao")
-  metrics      Metrics?
+  metrics      Metrics[]
+  sensors      Sensor[]
 
   @@map("Maquina")
 }
@@ -77,12 +79,104 @@ model Metrics {
   scheduledTime         Int      @map("tempo_programado")
   productionTime        Int      @map("tempo_em_producao")
   productionTheoricTIme Int      @map("tempo_teorico_producao")
+  realProductionTime    Int?     @map("tempo_producao_real")
   downtime              Int      @map("tempo_paradas")
   partsProduced         Int      @map("pecas_produzidas")
   partsDiscarded        Int      @map("pecas_defeito")
   date                  DateTime @map("data")
-  machineId             Int      @unique @map("maquina_id")
+  machineId             Int      @map("maquina_id")
   machine               Machine  @relation(fields: [machineId], references: [id])
 
   @@map("Indicadores")
+}
+
+// extras 
+model Sensor {
+  id          Int     @id @default(autoincrement()) @map("id")
+  description String? @map("descricao")
+  machineId   Int     @map("maquina_id")
+  machine     Machine @relation(fields: [machineId], references: [id])
+  events      Event[]
+
+  @@map("Sensores")
+}
+
+model EventType {
+  id          Int     @id @default(autoincrement()) @map("id")
+  description String? @map("descricao")
+  criticality String  @map("criticidade")
+  events      Event[]
+
+  @@map("Tipo_Evento")
+}
+
+model Event {
+  id                Int             @id @default(autoincrement()) @map("id")
+  dateTime          DateTime        @map("data_hora")
+  sensorId          Int             @map("sensores_id")
+  eventTypeId       Int             @map("tipo_evento_id")
+  productionOrderId Int             @map("ordem_producao_id")
+  sensor            Sensor          @relation(fields: [sensorId], references: [id])
+  eventType         EventType       @relation(fields: [eventTypeId], references: [id])
+  productionOrder   ProductionOrder @relation(fields: [productionOrderId], references: [id])
+
+  @@map("Evento")
+}
+
+model Product {
+  id               Int               @id @default(autoincrement()) @map("id")
+  name             String            @map("nome")
+  description      String?           @map("descricao")
+  productionOrders ProductionOrder[]
+  recipes          Recipe[]
+
+  @@map("Produto")
+}
+
+model ProductionOrder {
+  id            Int      @id @default(autoincrement()) @map("id")
+  quantity      Int      @map("quantidade_pecas")
+  status        String   @map("status")
+  executionDate DateTime @map("data_execucao")
+  creationDate  DateTime @map("data_criacao")
+  description   String?  @map("descricao")
+  plannedTime   Int      @map("tempo_planejado")
+  productId     Int      @map("produto_id")
+  userId        Int      @map("usuario_id")
+  product       Product  @relation(fields: [productId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
+  events        Event[]
+
+  @@map("Ordem_Producao")
+}
+
+model Inventory {
+  id           Int           @id @default(autoincrement()) @map("id")
+  quantity     Int           @map("quantidade")
+  rawMaterials RawMaterial[]
+
+  @@map("Estoque")
+}
+
+model RawMaterial {
+  id                Int       @id @default(autoincrement()) @map("id")
+  description       String?   @map("descricao")
+  manufacturingDate DateTime  @map("data_fabricacao")
+  expirationDate    DateTime  @map("data_validade")
+  weight            Float     @map("massa")
+  inventoryId       Int       @map("estoque_id")
+  inventory         Inventory @relation(fields: [inventoryId], references: [id])
+  recipes           Recipe[]
+
+  @@map("Materia_Prima")
+}
+
+model Recipe {
+  id            Int         @id @default(autoincrement()) @map("id")
+  rawMaterialId Int         @map("materia_prima_id")
+  productId     Int         @map("produto_id")
+  rawMaterial   RawMaterial @relation(fields: [rawMaterialId], references: [id])
+  product       Product     @relation(fields: [productId], references: [id])
+
+  @@map("Receita")
 }

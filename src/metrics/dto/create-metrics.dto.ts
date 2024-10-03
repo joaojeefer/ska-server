@@ -8,6 +8,7 @@ export default interface CreateMetricsDTO {
   downtime: number;
   productionTime: number;
   productionTheoricTIme: number;
+  realProductionTime: number;
   partsDiscarded: number;
   partsProduced: number;
   date: Date;

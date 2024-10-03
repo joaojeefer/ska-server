@@ -108,3 +108,29 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuY
     "partsDiscarded": 100,
     "date": "2021-07-19T00:00:00.000Z"
 }
+
+### get de todas as ordens de produção
+GET http://localhost:3001/production-order/2
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
+
+### cria uma nova ordem de produção
+POST http://localhost:3001/production-order
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
+
+{
+    "quantity": 10,
+    "status": "Pending",
+    "executionDate": "2021-07-19T00:00:00.000Z",
+    "creationDate": "2021-07-19T00:00:00.000Z",
+    "description": "teste",
+    "plannedTime": "2021-07-19T00:00:00.000Z",
+    "productId": 1,
+    "userId": 1,
+}
+
+### get de todos os sensores de produção
+GET http://localhost:3001/sensor/1
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
