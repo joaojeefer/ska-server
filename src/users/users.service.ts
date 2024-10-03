@@ -1,30 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
-import User from './user.entity';
 import CreateUserDTO from './dto/create-user.dto';
+import { GetUserDTO } from './dto/get-user.dto';
+import User from './user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(private dbService: PrismaService) {}
 
   async findUserByUsername(username: string): Promise<User | undefined> {
-    return this.dbService.user.findUnique({ where: { username } });
-  }
-
-  async getUsers(): Promise<User[]> {
-    return this.dbService.user.findMany({
-      include: { role: true, shift: true, userInfo: true },
-    });
-  }
-
-  async getUserById(id: string): Promise<User | null> {
     return this.dbService.user.findUnique({
-      where: { id: parseInt(id) },
       include: { role: true, shift: true, userInfo: true },
+      where: { username },
     });
   }
 
-  async createUser(user: CreateUserDTO): Promise<{ username: string }> {
+  async getUsers(): Promise<GetUserDTO[] | undefined> {
+    return this.dbService.user.findMany({
+      select: { id: true, name: true, username: true },
+    });
+  }
+
+  async getUserById(id: string): Promise<GetUserDTO | undefined> {
+    return this.dbService.user.findUnique({
+      select: { id: true, name: true, username: true },
+      where: { id: parseInt(id) },
+    });
+  }
+
+  async createUser(user: CreateUserDTO): Promise<GetUserDTO | undefined> {
     const newUser = await this.dbService.user.create({
       data: {
         name: user.name,
@@ -52,6 +56,6 @@ export class UsersService {
       },
     });
 
-    return { username: newUser.username };
+    return { id: newUser.id, name: newUser.name, username: newUser.username };
   }
 }
