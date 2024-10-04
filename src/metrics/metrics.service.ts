@@ -7,7 +7,7 @@ export class MetricsService {
   constructor(private dbService: PrismaService) {}
 
   async getMetricsByMachine(machineId: string) {
-    return this.dbService.metrics.findUniqueOrThrow({
+    return this.dbService.metrics.findMany({
       where: { machineId: parseInt(machineId) },
       include: { machine: true },
     });
@@ -29,6 +29,7 @@ export class MetricsService {
         downtime: metrics.downtime,
         productionTime: metrics.productionTime,
         productionTheoricTIme: metrics.productionTheoricTIme,
+        realProductionTime: metrics.realProductionTime,
         partsDiscarded: metrics.partsDiscarded,
         partsProduced: metrics.partsProduced,
         date: metrics.date,

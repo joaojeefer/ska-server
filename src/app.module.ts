@@ -7,6 +7,8 @@ import { MetricsModule } from './metrics/metrics.module';
 import { MachineModule } from './machine/machine.module';
 import { ShiftModule } from './shift/shift.module';
 import { RoleModule } from './role/role.module';
+import { ProductionOrderModule } from './production-order/production-order.module';
+import { SensorModule } from './sensor/sensor.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { RoleModule } from './role/role.module';
     MachineModule,
     RoleModule,
     ShiftModule,
+    ProductionOrderModule,
+    SensorModule,
   ],
   controllers: [],
   providers: [],
