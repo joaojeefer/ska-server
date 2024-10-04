@@ -86,7 +86,7 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuY
 }
 
 ### lista de métricas de máquina
-GET http://localhost:3001/metrics/machine/1
+GET http://localhost:3001/metrics/machine/1?days=4
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTcyNzc0OTE1NiwiZXhwIjoxNzI3ODM1NTU2fQ.fxr8SRRiBTlFuhlx9pxJDwavGnjqzR_wOz4FQ22F28U
 
 ### cadastro de métrica de máquina

@@ -6,10 +6,14 @@ import CreateMetricsDTO from './dto/create-metrics.dto';
 export class MetricsService {
   constructor(private dbService: PrismaService) {}
 
-  async getMetricsByMachine(machineId: string) {
+  async getMetricsByMachineAndDays(machineId: string, numberOfDays: number) {
+    const daysAgo = new Date();
+    daysAgo.setDate(daysAgo.getDate() - numberOfDays);
+
     return this.dbService.metrics.findMany({
-      where: { machineId: parseInt(machineId) },
+      where: { machineId: parseInt(machineId), date: { gte: daysAgo } },
       include: { machine: true },
+      orderBy: { date: 'desc' },
     });
   }
 
