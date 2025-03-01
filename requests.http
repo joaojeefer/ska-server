@@ -7,9 +7,13 @@ POST http://localhost:3001/auth/login
 content-type: application/json
 
 {
-    "username": "1234567890",
+    "username": "01745355030",
     "password": "123123"
 }
+
+### valida token
+POST http://localhost:3001/auth/me
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiMDE3NDUzNTUwMzAiLCJpYXQiOjE3Mjk1NjE1ODQsImV4cCI6MTcyOTY0Nzk4NH0.qD16QIHDfEmhAJBUiMzVqygVXuX3atmTsRFjkJRv9Es
 
 ### lista de usuários
 GET http://localhost:3001/users

@@ -18,6 +18,25 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async validateToken(authorization?: string) {
+    try {
+      const token = authorization?.split(' ')[1];
+
+      if (!token) {
+        throw new UnauthorizedException();
+      }
+
+      const tokenPayload = await this.jwtService.verifyAsync(token);
+
+      return {
+        userId: tokenPayload.sub,
+        username: tokenPayload.username,
+      };
+    } catch {
+      throw new UnauthorizedException();
+    }
+  }
+
   async validateUser(input: AuthInput): Promise<SignInData | null> {
     const user = await this.usersService.findUserByUsername(input.username);
 
@@ -40,7 +59,7 @@ export class AuthService {
     const accessToken = await this.jwtService.signAsync(tokenPayload);
 
     return {
-      accessToken: accessToken,
+      accessToken,
       userId: user.userId,
       username: user.username,
       name: user.name,
